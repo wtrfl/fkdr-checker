@@ -1,0 +1,40 @@
+{
+    "name": "fkdr-checker",
+    "version": "1.0.3",
+    "description": "a tool to check how many finals you need to advance your bedwars fkdr",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder"
+    },
+    "author": "wtrfl",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^19.0.1",
+        "electron-builder": "^23.0.3"
+    },
+    "dependencies": {
+        "axios": "^0.27.2",
+        "dotenv": "^16.0.1",
+        "path": "^0.12.7"
+    },
+    "build": {
+        "appId": "com.wtrfl.fkdrchecker",
+        "artifactName": "${productName} Setup v${version}.${ext}",
+        "productName": "FKDR Checker",
+        "target": "NSIS",
+        "win": {
+            "target": [
+                "nsis"
+            ],
+            "icon": "assets/icon.ico"
+        },
+        "nsis": {
+            "installerIcon": "assets/icon.ico",
+            "uninstallerIcon": "assets/icon.ico",
+            "uninstallDisplayName": "FKDR Checker",
+            "allowToChangeInstallationDirectory": true,
+            "oneClick": false
+        }
+    }
+}

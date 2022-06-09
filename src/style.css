@@ -95,7 +95,8 @@ input[type=text] {
     outline: none;
 }
 
-#submit {
+#submit,
+#apiSubmit {
     background: none;
     /*border: 1px solid purple;
     border-radius: 5px;*/
@@ -109,7 +110,8 @@ input[type=text] {
     filter: drop-shadow(1px 1px rgb(0, 0, 0));
 }
 
-#submit:hover {
+#submit:hover,
+#apiSubmit:hover {
     color: darkred;
 }
 
@@ -129,7 +131,8 @@ h1 {
     filter: drop-shadow(4px 4px rgb(0, 0, 0));
 }
 
-#errorReporting {
+#errorReporting,
+#apiErrorReporting {
     font-size: 8pt;
     color: lightcoral;
 }
@@ -143,4 +146,20 @@ h1 {
     font-family: 'Minecraftia';
     font-size: 7pt;
     text-align: center;
+}
+
+
+/*#username {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-family: 'Minecraftia';
+    font-size: 7pt;
+    text-align: left;
+}*/
+
+#calculator,
+#api_setter {
+    display: none;
 }

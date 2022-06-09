@@ -3,9 +3,14 @@ const ipc = ipcRenderer
 const axios = require('axios').default;
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+const Store = require('electron-store');
+const store = new Store();
 
 const closeBtn = document.getElementById('quit')
 const minimizeBtn = document.getElementById('minimize')
+
+const calculatorDiv = document.getElementById('calculator')
+const apiDiv = document.getElementById('api_setter')
 
 const ignBox = document.getElementById('ign')
 const submitBtn = document.getElementById('submit')
@@ -15,24 +20,61 @@ const outTen = document.getElementById('out-ten');
 const outHun = document.getElementById('out-hun');
 const errRep = document.getElementById('errorReporting');
 
-var apiKey = process.env.API_KEY
+const apiBox = document.getElementById('apibox')
+const apiSubmitBtn = document.getElementById('apiSubmit')
+const apiErrRep = document.getElementById('apiErrorReporting')
+
+//var apiKey = process.env.API_KEY
+/*store.set('key', process.env.API_KEY)
+var apiKey = store.get('key')*/
 
 closeBtn.addEventListener('click', () => { ipc.send('closeApp') })
 minimizeBtn.addEventListener('click', () => { ipc.send('minimizeApp') })
 
-function checkName(name) {
-    return true;
-}
-
 const playerUrl = ign => `https://api.hypixel.net/player?key=${apiKey}&name=${ign}`;
+const keyUrl = key => `https://api.hypixel.net/key?key=${key}`;
 const textGen = (nextFkdr, toNextFkdr) => `finals to <span class="highlighted">${nextFkdr} fkdr</span>: ${toNextFkdr}`;
 
+function hasApiKey() {
+    console.log('key =', store.get('key'))
+    if (store.get('key') === undefined) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function showAPIorCalc() {
+    if (hasApiKey()) {
+        calculatorDiv.style.display = 'block';
+    } else {
+        apiDiv.style.display = 'block';
+    }
+}
+
+function addKey() {
+
+    if (apiBox.value === null) return
+    let key = apiBox.value
+
+    axios.get(keyUrl(key)).then(response => {
+
+        console.log(response)
+
+    }).catch(error => {
+
+        console.log('error!')
+        console.log(error)
+        apiErrRep.innerText = error.response.data.cause + "!";
+
+    })
+
+}
 
 function calculate() {
 
-    //if (ignBox.value === null) return
+    if (ignBox.value === null) return
     let name = ignBox.value
-        //if (!checkName(name)) return
 
     let fkills;
     let fdeaths;
@@ -86,3 +128,7 @@ function calculate() {
 }
 
 submitBtn.addEventListener('click', calculate)
+apiSubmitBtn.addEventListener('click', addKey)
+
+// PROGRAM START
+showAPIorCalc();

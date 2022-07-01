@@ -5,6 +5,7 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const Store = require('electron-store');
 const store = new Store();
+const shell = require('electron').shell;
 
 const closeBtn = document.getElementById('quit')
 const minimizeBtn = document.getElementById('minimize')
@@ -14,6 +15,9 @@ const apiDiv = document.getElementById('api_setter')
 
 const ignBox = document.getElementById('ign')
 const submitBtn = document.getElementById('submit')
+
+const apiChanger = document.getElementById('apiChanger')
+const youtubeLink = document.getElementById('youtubeLink')
 
 const outInt = document.getElementById('out-int');
 const outTen = document.getElementById('out-ten');
@@ -27,6 +31,7 @@ const apiErrRep = document.getElementById('apiErrorReporting')
 //var apiKey = process.env.API_KEY
 /*store.set('key', process.env.API_KEY)
 var apiKey = store.get('key')*/
+var apiKey;
 
 closeBtn.addEventListener('click', () => { ipc.send('closeApp') })
 minimizeBtn.addEventListener('click', () => { ipc.send('minimizeApp') })
@@ -46,10 +51,21 @@ function hasApiKey() {
 
 function showAPIorCalc() {
     if (hasApiKey()) {
+        apiDiv.style.display = 'none';
+        apiKey = store.get('key');
         calculatorDiv.style.display = 'block';
+        apiChanger.style.display = 'block';
     } else {
+        calculatorDiv.style.display = 'none';
         apiDiv.style.display = 'block';
+        apiChanger.style.display = 'none';
     }
+}
+
+function resetApi() {
+    store.delete('key');
+    apiKey = '';
+    showAPIorCalc();
 }
 
 function addKey() {
@@ -60,6 +76,8 @@ function addKey() {
     axios.get(keyUrl(key)).then(response => {
 
         console.log(response)
+        store.set('key', key)
+        showAPIorCalc()
 
     }).catch(error => {
 
@@ -128,7 +146,12 @@ function calculate() {
 }
 
 submitBtn.addEventListener('click', calculate)
+apiChanger.addEventListener('click', resetApi)
 apiSubmitBtn.addEventListener('click', addKey)
+
+youtubeLink.addEventListener('click', () => {
+    shell.openExternal('https://www.youtube.com/channel/UCbIssFqSo_JZZNjzLaILWMQ')
+})
 
 // PROGRAM START
 showAPIorCalc();

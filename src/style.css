@@ -137,6 +137,21 @@ h1 {
     color: lightcoral;
 }
 
+#apiChanger {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    cursor: pointer;
+    font-family: 'Minecraftia';
+    font-size: 7pt;
+    text-align: left;
+    text-decoration: underline;
+    margin-left: 17px;
+    margin-bottom: 15px;
+    display: none;
+}
+
 #credits {
     position: absolute;
     bottom: 0;
@@ -146,6 +161,20 @@ h1 {
     font-family: 'Minecraftia';
     font-size: 7pt;
     text-align: center;
+}
+
+#youtubeLink {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: white;
+    cursor: pointer;
+    font-family: 'Minecraftia';
+    font-size: 7pt;
+    text-align: right;
+    text-decoration: underline;
+    margin-right: 17px;
+    margin-bottom: 15px;
 }
 
 

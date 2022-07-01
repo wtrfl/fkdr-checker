@@ -19,8 +19,8 @@ const createWindow = () => {
 
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 1000, //500
-        height: 1000, //325
+        width: 500, //500 (1000 debug)
+        height: 325, //325 (1000 debug)
         resizable: true,
         minWidth: 500,
         minHeight: 325,
@@ -37,7 +37,10 @@ const createWindow = () => {
     })
 
     //loadingWindow.loadURL('file://' + __dirname + '/assets/loading.png')
+    
+    // temporarily removed for development on linux
     loadingWindow.loadFile('src/loading.html')
+    mainWindow.loadFile('src/index.html')
 
     mainWindow.webContents.once('did-finish-load', function() {
         mainWindow.show();
@@ -59,8 +62,8 @@ const createWindow = () => {
         }
     })*/
 
-    mainWindow.loadFile('src/index.html')
-    mainWindow.webContents.openDevTools()
+    
+    //mainWindow.webContents.openDevTools()
 
     ipc.on('minimizeApp', () => {
         mainWindow.minimize()

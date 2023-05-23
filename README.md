@@ -21,3 +21,6 @@ Every Hypixel player has access to the free public API with a limit of 120 queri
 This project is created in node.js and electron.<br />
 After cloning the project from this repo, replace the ``apiKey`` variable in src/index.js with your own API key.<br />
 Make sure the dependencies are installed and then build it! 
+
+**Developer's Note:**
+Oh lord🤦 this code is pretty old so it's all unoptimized and everything is weird so I apologize if it does not work very well!

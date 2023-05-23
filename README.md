@@ -2,7 +2,7 @@
 <h1 align="center">FKDR CHECKER</h1>
 
 <p align="center">a tool to check how many finals you need to advance your bedwars fkdr</p>
-<p align="center">⚠️ <b>Please read the API Warning<b> ⚠️</p>
+<p align="center">⚠️ <b>Please read the API Warning</b> ⚠️</p>
 <br />
 <hr />
 
